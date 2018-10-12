@@ -1,0 +1,12 @@
+table td {
+  width: 33%;
+  vertical-align: middle !important;
+}
+
+attribute-bind {
+  color: red !important;
+}
+
+pre {
+  display: inline;
+}

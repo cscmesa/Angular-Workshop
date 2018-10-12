@@ -1,0 +1,319 @@
+<!-- First View -->
+<p class="lead mt-2"><b><u>First Component</u></b></p>
+
+<div id="interpolation-example" class="mb-5">
+  <h1 class="display-4" style="font-size: 2.5rem"><i>Interpolation</i></h1>
+  <p><b>Below, we are pulling data from our component and displaying it in our view.</b></p>
+  <p>The syntax for variable interpolation is two sets of curly braces surrounding the variable:</p>
+  <code>
+    <p ngNonBindable class="lead">{{ variable name here }}</p>
+  </code>
+  <p>{{ interpolation_data }}</p>
+</div>
+<div id="data-binding" class="mb-5">
+  <h1 class="display-4" style="font-size: 2.5rem"><i>Data-Binding</i></h1>
+  <p><b>Next, we look at the different ways to bind data between our view and component:</b></p>
+  <table style="width: 100%" class="table table-bordered">
+    <thead>
+      <th>Data Direction</th>
+      <th>Syntax</th>
+      <th>Type</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>One-way from data-source to view target</td>
+        <td ngNonBindable>
+          <code>
+            <p>
+              {{ expression }}<br>
+              [target]="expression"<br>
+              bind-target="expression"
+            </p>
+          </code>
+        </td>
+        <td>
+          Interpolation<br>
+          Property<br>
+          Attribute<br>
+          Class<br>
+          Style<br>
+        </td>
+      </tr>
+      <tr>
+        <td>One-way from view target to data source</td>
+        <td ngNonBindable>
+          <code>
+            <p>
+              (target)="statement"<br>
+              on-target="statement"
+            </p>
+          </code>
+        </td>
+        <td>
+          Event
+        </td>
+      </tr>
+      <tr>
+        <td>Two-way</td>
+        <td ngNonBindable>
+          <code>
+            <p>
+              [(target)]="expression"<br>
+              bindon-target="expression"
+            </p>
+          </code>
+        </td>
+        <td>Two-way</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="data-source-to-target">
+    <p><b>One-way from data source to view target</b></p>
+    <code>
+      <p>
+        [target]="expression"
+      </p>
+      <p>
+        [style.color]=" bind ? 'red' : 'black' "
+      </p>
+    </code>
+    <p [style.color]="bind ? 'red' : 'black'">
+      This is the result.
+    </p>
+  </div>
+  <div id="target-to-data-source" class="mb-3">
+    <p><b>One-way from view target to data source</b></p>
+    <code>
+      <p>
+        (target)="expression"
+      </p>
+      <p>
+        (click)="bindingFunction()"
+      </p>
+    </code>
+    <button type="button" name="button" (click)="bindingFunction()"
+    class="btn btn-primary mb-2">
+      <span *ngIf="count < 1; else clickCount">Click me!</span>
+      <ng-template #clickCount>I have been clicked {{ count }} time<span *ngIf="count > 1">s</span>!</ng-template>
+    </button>
+  </div>
+  <div id="two-way" class="mb-3">
+    <p><b>Two-way between data source and view target</b></p>
+    <code>
+      <p>
+        [(target)]="expression"
+      </p>
+      <p>
+        [(ngModel)]="two_way_data"
+      </p>
+    </code>
+    <div class="row justify-content-center">
+      <div class="col-2">
+        <div class="input-group mb-3">
+          <label for="">Change the font-size below:</label>
+          <input type="number" class="form-control" [(ngModel)]="two_way_data">
+          <div class="input-group-append">
+            <span class="input-group-text">px</span>
+          </div>
+        </div>
+        <p [style.font-size.px]="two_way_data">I am some text.</p>
+      </div>
+    </div>
+    <button type="button" name="button" class="btn btn-primary my-2" (click)="two_way_data = 16">Reset</button>
+  </div>
+</div>
+<div id="directives" class="mb-5">
+  <h1 class="display-4" style="font-size: 2.5rem"><i>Directives</i></h1>
+  <p><b>Attribute Directives</b></p>
+  <p><i>ngClass</i></p>
+  <p>
+    Used for adding/removing many class at the same time.<br>
+    The ngClass directive takes a key:value control object.<br>
+    Each key is a CSS class name, and each value should be <b>true</b><br>if the class is to be added, or <b>false</b> if it is to be removed.
+  </p>
+  <p><i>ngStyle</i></p>
+  <p>
+    Used for adding/removing many styles at the same time.<br>
+    The ngStyle directive takes a key:value control object.<br>
+    Each key is a style name, and each value is whatever is appropriate for that style.
+  </p>
+  <p><i>ngModel</i></p>
+  <p ngNonBindable>
+    <span style="color: red">** Must import the FormsModule into your ngModule to use ngModel. **</span><br>
+    It is actually comprised of a [ngModel] input & (ngModelChange) output property.<br>
+    [(ngModel)] can only be used to <i>set</i> a data-bound property.<br>
+    Use the separated properties when you need to perform<br>something different or more complex.
+  </p>
+  <p><b>Structural Directives</b></p>
+  <p><i>ngIf</i></p>
+  <p>
+    Used to add/remove elements from the DOM. Must be bound to a condition expression.<br>
+    Important to note that this is not the same as showing/hiding the element.
+  </p>
+  <p ngNonBindable>
+    example usage:<br>
+    <code>
+      <span> <</span>
+      <span>app-component </span>
+      <span>*ngIf</span>
+      <span>=</span>
+      <span>"someExpression"</span>
+      <span>></span>
+      <span></span>
+      <span><</span>
+      <span>app-component/></span>
+    </code>
+  </p>
+  <div *ngIf="someExpression" class="mt-3">
+    I am some text within an ngIf directive.
+  </div>
+  <button type="button" name="button" class="btn btn-primary my-3" (click)="toggleNgIf()">Toggle ngIf</button>
+  <p>
+    We can use ngIf directives to protect guard elements against null values.
+  </p>
+  <p ngNonBindable>
+    example:<br>
+    <code>
+      <span><</span>
+      <span>div </span>
+      <span>*ngIf="realObject"</span>
+      <span>></span>
+      <span>{{ realObject.value }}</span>
+      <span><</span>
+      <span>/div></span>
+    </code>
+  </p>
+  <p><i>ngSwitch</i></p>
+  <p>
+    Used just like a typical switch statement. It will display <i>one</i> element from<br>several possible elements
+    based on a <i>switch condition</i>.
+  </p>
+  example usage:<br>
+  <div class="row justify-content-center">
+    <div class="col-5 ml-5">
+      <p class="text-left">
+        <code>
+          <span><</span>
+          <span>div </span>
+          <span>[ngSwitch]="someObject.color"</span>
+          <span>></span><br>
+            <pre>&#9;</pre>
+            <span><</span>
+            <span>app-red </span>
+            <pre>&#9;</pre>
+            <span> *ngSwitchCase="'red'"</span>
+            <span>></span>
+            <span><</span>
+            <span>/app-red</span>
+            <span>></span><br>
+            <pre>&#9;</pre>
+            <span><</span>
+            <span>app-blue </span>
+            <pre>&#9;</pre>
+            <span> *ngSwitchCase="'blue'"</span>
+            <span>></span>
+            <span><</span>
+            <span>/app-blue</span>
+            <span>></span><br>
+            <pre>&#9;</pre>
+            <span><</span>
+            <span>app-green </span>
+            <pre>&#9;</pre>
+            <span> *ngSwitchCase="'green'"</span>
+            <span>></span>
+            <span><</span>
+            <span>/app-green</span>
+            <span>></span><br>
+            <pre>&#9;</pre>
+            <span><</span>
+            <span>app-unknown </span>
+            <pre>&#9;</pre>
+            <span> *ngSwitchDefault</span>
+            <span>></span>
+            <span><</span>
+            <span>/app-unknown</span>
+            <span>></span><br>
+          <span><</span>
+          <span>/div</span>
+          <span>></span>
+        </code>
+      </p>
+    </div>
+  </div>
+  <p>example:</p>
+  <div class="row justify-content-center mb-3">
+    <div class="col-2">
+      <button type="button" name="button" class="btn btn-danger" (click)="color = 'red'">Toggle Red</button>
+    </div>
+    <div class="col-2">
+      <button type="button" name="button" class="btn btn-success" (click)="color = 'green'">Toggle Green</button>
+    </div>
+    <div class="col-2">
+      <button type="button" name="button" class="btn btn-primary" (click)="color = 'blue'">Toggle Blue</button>
+    </div>
+  </div>
+  <div [ngSwitch]="color" class="mb-3">
+    <div *ngSwitchCase="'red'" class="text-danger border border-danger mx-5"><b>I'm the red case!</b></div>
+    <div *ngSwitchCase="'green'" class="text-success border border-success mx-5"><b>I'm the green case!</b></div>
+    <div *ngSwitchCase="'blue'" class="text-primary border border-primary mx-5"><b>I'm the blue case!</b></div>
+    <div *ngSwitchDefault class="border border-dark mx-5">I'm the default case!</div>
+  </div>
+  <p><i>ngForOf</i></p>
+  <p>Used to present a list of items. A block of HTML is defined that defines how a single item should be displayed.<br>
+  That block is then used as a template for the rest of items in the list.</p>
+  <p ngNonBindable>
+    example usage:<br>
+    <code>
+      <span><</span>
+      <span>div </span>
+      <span>*ngFor="let item of items"</span>
+      <span>></span>
+      <span>{{ item }}</span>
+      <span><</span>
+      <span>/div</span>
+      <span>></span>
+    </code>
+  </p>
+  <p>
+    example:<br>
+    Component data:
+    <code>listOfItems = [ 'item1', 'item2', 'item3', 'item4', 'item5' ]</code><br>
+  </p>
+  <p>Output with ngFor:</p>
+  <div *ngFor="let item of listOfItems; let i = index">
+    Element {{ i }} is: {{ item }}
+  </div>
+</div>
+<div id="pipes">
+  <h1 class="display-4" style="font-size: 2.5rem"><i>Pipes</i></h1>
+  <p>
+    Sometimes, the result of an expression or a value might need some transformation<br>
+    before using it in a binding. You might need to display a number as currency,<br>
+    force uppercase text, or filter/sort a list. These small transformations can be<br>
+    done using pipes, simple functions that accept an input and return a transformed value.<br>
+    They can be applied within template expressions using the pipe operator: <code>(|)</code>
+  </p>
+  <p ngNonBindable>
+    example usage:<br>
+    <code>
+      <span><</span>
+      <span>/div</span>
+      <span>></span>
+      <span>Text through uppercase pipe: {{ someText | uppercase }}</span>
+      <span><</span>
+      <span>/div</span>
+      <span>></span>
+    </code>
+  </p>
+  <p>
+    examples:<br><br>
+    original: I'm some text!<br>
+    after pipe <code> | uppercase </code>: {{ "I'm some text!" | uppercase }}<br><br>
+    original: 123456<br>
+    after pipe <code> | currency </code>: {{ 123456 | currency }}<br><br>
+    original: 1539319768961<br>
+    after pipe <code> | date:'longDate' </code>: {{ 1539319768961 | date:'longDate' }}<br><br>
+    original: Object<br>
+    after pipe: <code> | json </code>: {{ jsonPipe | json }}<br><br>
+  </p>
+</div>
