@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./first.component.css']
 })
 export class FirstComponent implements OnInit {
-
   interpolation_data: string = "I am data from the component!";
   bind: boolean = true;
   count: number = 0;
