@@ -1,7 +1,14 @@
 <!-- Firebase View -->
-<p>
-  Now you're in the firebase component.
-</p>
-<div *ngFor="let item of dbData | async">
-  Item Message: {{ item.message }}
+<p class="lead mt-2"><b><u>Firebase Component</u></b></p>
+
+<div id="firestore-data" class="mb-5">
+  <div class="row justify-content-center">
+    <div class="col-5 border border-danger">
+      <p><b>Data from Firestore database</b></p>
+      <div *ngFor="let item of dbData | async">
+        Item Message: {{ item.message }}
+      </div>
+      <button type="button" name="button" class="btn btn-danger my-4">Send Message</button>
+    </div>
+  </div>
 </div>

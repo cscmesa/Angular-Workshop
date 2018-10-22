@@ -311,8 +311,8 @@
     after pipe <code> | uppercase </code>: {{ "I'm some text!" | uppercase }}<br><br>
     original: 123456<br>
     after pipe <code> | currency </code>: {{ 123456 | currency }}<br><br>
-    original: 1539319768961<br>
-    after pipe <code> | date:'longDate' </code>: {{ 1539319768961 | date:'longDate' }}<br><br>
+    original: {{ today }}<br>
+    after pipe <code> | date:'longDate' </code>: {{ today | date:'longDate' }}<br><br>
     original: Object<br>
     after pipe: <code> | json </code>: {{ jsonPipe | json }}<br><br>
   </p>

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-import { AngularFirestoreCollection, AngularFirestore } from 'angularfire2/firestore';
-import { Observable } from 'rxjs';
+import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
   selector: 'app-firebase',
@@ -10,13 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class FirebaseComponent implements OnInit {
 
-  dbCollection: AngularFirestoreCollection<any>;
-  dbData: Observable<any[]>
-  data: any;
+  dbData: any;
 
-  constructor(private afs: AngularFirestore) {
-    this.dbCollection = this.afs.collection('testData');
-    this.dbData = this.dbCollection.valueChanges();
+  constructor(private firestore: FirestoreService) {
+    this.dbData = this.firestore.getMessages();
+  }
+
+  sendMessage() {
+
   }
 
   ngOnInit() {

@@ -18,6 +18,8 @@ import { FirebaseModule } from './modules/firebase/firebase.module';
 import { AppComponent } from './app.component';
 import { LoneComponent } from './lone/lone.component';
 
+import { FirestoreService } from './services/firestore.service';
+
 @NgModule({
   // Declarations are the components, directives, & pipes that belong to this module
   declarations: [
@@ -33,7 +35,7 @@ import { LoneComponent } from './lone/lone.component';
     FirebaseModule
   ],
   // Creates services that are distributed to rest of app
-  providers: [],
+  providers: [FirestoreService],
   // Hosts all other app views - SHOULD ONLY BE IN ROOT NGMODULE
   bootstrap: [AppComponent]
 })
